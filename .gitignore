@@ -1,3 +1,8 @@
 # Godot 4+ specific ignores
+.godot
+.godot/
+.godot/editor
+.godot/shader_cache
+/.godot
 /.godot/editor
 /.godot/shader_cache
