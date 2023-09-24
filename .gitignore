@@ -6,3 +6,6 @@
 /.godot
 /.godot/editor
 /.godot/shader_cache
+/.godot/
+/.godot/editor/
+/.godot/shader_cache/
