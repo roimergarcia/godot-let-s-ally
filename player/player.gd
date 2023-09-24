@@ -41,7 +41,7 @@ func get_input():
 	#print_debug(input_direction)
 	velocity = input_direction * speed
 
-func _physics_prosdcess(delta):
+func _physics_process(delta):
 	get_input()
 	#rotation += rotation_direction * rotation_speed * delta
 	move_and_slide()
