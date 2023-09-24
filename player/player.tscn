@@ -86,7 +86,7 @@ region = Rect2(120, 0, 60, 60)
 atlas = ExtResource("2_sap1f")
 region = Rect2(180, 0, 60, 60)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ulmwb"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_m4dmh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -189,18 +189,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_72vgt"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_45br7"]
 radius = 12.0
 
-[node name="player" type="Node2D"]
-
-[node name="player_body" type="CharacterBody2D" parent="." groups=["Player"]]
+[node name="player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_3s8c1")
 
-[node name="player_anim_2d" type="AnimatedSprite2D" parent="player_body"]
-sprite_frames = SubResource("SpriteFrames_ulmwb")
+[node name="player_anim_2d" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m4dmh")
 animation = &"idle_down"
 offset = Vector2(0, -24)
 
-[node name="player_coll_shape_2d" type="CollisionShape2D" parent="player_body"]
-shape = SubResource("CircleShape2D_72vgt")
+[node name="player_coll_shape_2d" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_45br7")
