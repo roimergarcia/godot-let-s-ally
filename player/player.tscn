@@ -194,13 +194,13 @@ radius = 11.7047
 
 [node name="player" type="Node2D"]
 
-[node name="player_body" type="CharacterBody2D" parent="."]
+[node name="player_body" type="CharacterBody2D" parent="." groups=["Player"]]
 script = ExtResource("1_3s8c1")
 
 [node name="player_anim_2d" type="AnimatedSprite2D" parent="player_body"]
-position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_ulmwb")
 animation = &"idle_up"
+offset = Vector2(0, -24)
 
 [node name="player_coll_shape_2d" type="CollisionShape2D" parent="player_body"]
 shape = SubResource("CircleShape2D_72vgt")
