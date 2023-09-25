@@ -14,10 +14,7 @@ var walk_direction := Vector2(0, -1)
 var face_dir : FASE_DIRECTION = FASE_DIRECTION.DOWN; 
 
 func chase_player():
-	if player_chase:
-		print("player_chase: ", player_chase)
-		print("player position: ", player.position)
-		print("enemy position: ", position)
+	if player_chase and not player_inattack_zone:
 		position += (player.position - position) / speed
 		if player.position.y < position.y:
 			$enemy_anim_2d.play("walk_back")
@@ -37,19 +34,19 @@ func _physics_process(delta):
 
 
 func _on_detection_area_body_entered(body):
-	if body.has_method("player"):
+	if body.is_in_group("Player"):
 		player = body
 		player_chase = true
 
 func _on_detection_area_body_exited(body):
-	if body.has_method("player"):
+	if body.is_in_group("Player"):
 		player = null
 		player_chase = false
 
 func _on_attack_area_body_entered(body):
-	if body.has_method("player"):
+	if body.is_in_group("Player"):
 		player_inattack_zone = true
 
 func _on_attack_area_body_exited(body):
-	if body.has_method("player"):
+	if body.is_in_group("Player"):
 		player_inattack_zone = false
