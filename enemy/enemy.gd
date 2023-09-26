@@ -15,13 +15,33 @@ var face_dir : FASE_DIRECTION = FASE_DIRECTION.DOWN;
 
 func chase_player():
 	if player_chase and not player_inattack_zone:
+		var angulo = position.angle_to_point (player.position)
+		#print((player.position - position).normalized())
+		#print(position.dot((player.position - position).normalized()))
+		#print(position.angle_to_point (player.position))
 		position += (player.position - position) / speed
-		if player.position.y < position.y:
+		if angulo > -0.75 and angulo < 0.75:
+			face_dir = FASE_DIRECTION.RIGHT
+			$enemy_anim_2d.play("walk_right")
+		elif angulo > 0.75 and angulo < 2.25:
+			face_dir = FASE_DIRECTION.DOWN
+			$enemy_anim_2d.play("walk_front")
+		elif angulo < -0.75 and angulo > -2.25:
+			face_dir = FASE_DIRECTION.UP
 			$enemy_anim_2d.play("walk_back")
 		else:
-			$enemy_anim_2d.play("walk_front")
+			face_dir = FASE_DIRECTION.LEFT
+			$enemy_anim_2d.play("walk_left")
 	else:
-		$enemy_anim_2d.play("idle_front")
+		match(face_dir):
+			FASE_DIRECTION.UP:
+				$enemy_anim_2d.play("idle_back")
+			FASE_DIRECTION.DOWN:
+				$enemy_anim_2d.play("idle_front")
+			FASE_DIRECTION.LEFT:
+				$enemy_anim_2d.play("idle_left")
+			FASE_DIRECTION.RIGHT:
+				$enemy_anim_2d.play("idle_right")
 
 func aleatory_movement():
 	pass
