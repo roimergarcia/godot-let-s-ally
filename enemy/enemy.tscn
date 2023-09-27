@@ -199,7 +199,7 @@ radius = 250.0
 size = Vector2(26, 40)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5cbgh"]
-radius = 19.2354
+radius = 17.0
 
 [node name="enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_s4jig")
@@ -226,12 +226,20 @@ shape = SubResource("RectangleShape2D_atgu3")
 
 [node name="attack_area" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+[node name="enemy_attack_area_coll" type="CollisionShape2D" parent="attack_area"]
+position = Vector2(-7, 0)
 shape = SubResource("CircleShape2D_5cbgh")
 
 [node name="take_damage_cooldown" type="Timer" parent="."]
+
+[node name="continue_chasing" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="walking" type="Timer" parent="."]
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="continue_chasing" to="." method="_on_continue_chasing_timeout"]
+[connection signal="timeout" from="walking" to="." method="_on_walking_timeout"]
