@@ -44,15 +44,16 @@ func chase_player():
 			$attack_area/enemy_attack_area_coll.position.x = -7
 			$attack_area/enemy_attack_area_coll.position.y = 0
 	else:
-		match(face_dir):
-			FASE_DIRECTION.UP:
-				$enemy_anim_2d.play("idle_back")
-			FASE_DIRECTION.DOWN:
-				$enemy_anim_2d.play("idle_front")
-			FASE_DIRECTION.LEFT:
-				$enemy_anim_2d.play("idle_left")
-			FASE_DIRECTION.RIGHT:
-				$enemy_anim_2d.play("idle_right")
+		if not walking:
+			match(face_dir):
+				FASE_DIRECTION.UP:
+					$enemy_anim_2d.play("idle_back")
+				FASE_DIRECTION.DOWN:
+					$enemy_anim_2d.play("idle_front")
+				FASE_DIRECTION.LEFT:
+					$enemy_anim_2d.play("idle_left")
+				FASE_DIRECTION.RIGHT:
+					$enemy_anim_2d.play("idle_right")
 
 func random_movement():
 	var random_generator = RandomNumberGenerator.new()
@@ -60,7 +61,7 @@ func random_movement():
 	var walk_chance = random_generator.randf_range(1, 100)
 	var _face_directions = ["UP","DOWN","LEFT","RIGHT"]
 	
-	if not player_chase and not walking and spin_chance <= 3:
+	if not player_chase and not walking and spin_chance <= 2:
 		face_dir = FASE_DIRECTION[_face_directions[randi() % _face_directions.size()]]
 		print(face_dir)
 		

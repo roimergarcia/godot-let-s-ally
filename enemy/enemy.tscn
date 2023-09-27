@@ -206,7 +206,7 @@ script = ExtResource("1_s4jig")
 
 [node name="enemy_anim_2d" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dex8x")
-animation = &"idle_front"
+animation = &"walk_right"
 offset = Vector2(0, -20)
 
 [node name="enemy_coll_shape_2d" type="CollisionShape2D" parent="."]

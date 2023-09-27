@@ -16,3 +16,12 @@ position = Vector2(1500, 500)
 
 [node name="enemy3" parent="." instance=ExtResource("1_726yh")]
 position = Vector2(772, 981)
+
+[node name="enemy4" parent="." instance=ExtResource("1_726yh")]
+position = Vector2(214, 885)
+
+[node name="enemy5" parent="." instance=ExtResource("1_726yh")]
+position = Vector2(1010, 239)
+
+[node name="enemy6" parent="." instance=ExtResource("1_726yh")]
+position = Vector2(1706, 976)
