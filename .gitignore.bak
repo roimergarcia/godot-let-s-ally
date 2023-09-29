@@ -1,5 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 *.tmp
-*.bin
-.godot/uid_cache.bin
+!*.bin
+!.godot/uid_cache.bin

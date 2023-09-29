@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://c83wx801nhhao"]
 
 [ext_resource type="PackedScene" uid="uid://b03yneklmt734" path="res://player/player.tscn" id="1_l01yc"]
-[ext_resource type="PackedScene" uid="uid://bdnoko8kd08bn" path="res://allies/ally_fighter.tscn" id="2_dev5g"]
+[ext_resource type="PackedScene" uid="uid://6exhpwab437c" path="res://allies/survivor_fighter.tscn" id="2_dev5g"]
 
 [node name="player_sandbox" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_l01yc")]
 position = Vector2(189, 177)
 
-[node name="ally" parent="." instance=ExtResource("2_dev5g")]
+[node name="ally" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_dev5g")]
 position = Vector2(531, 185)
+player = NodePath("../player")

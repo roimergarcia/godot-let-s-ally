@@ -9,8 +9,6 @@ var walk_direction := Vector2(0, -1)
 var face_dir : FACE_DIRECTION = FACE_DIRECTION.DOWN; 
 
 func get_input():
-#	rotation_direction = Input.get_axis("left", "right")
-#	velocity = -transform.y * Input.get_axis("down", "up") * speed
  
 	#Walk Animation
 	if Input.is_action_pressed("up"):
@@ -45,5 +43,3 @@ func _physics_process(delta):
 	#rotation += rotation_direction * rotation_speed * delta
 	move_and_slide()
 
-func player():
-	pass

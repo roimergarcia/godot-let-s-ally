@@ -1,7 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://bdnoko8kd08bn"]
+[gd_scene load_steps=30 format=3 uid="uid://bjatbqanvv2qn"]
 
 [ext_resource type="Texture2D" uid="uid://4vhfv3jj6pj3" path="res://allies/sprites/survivor_fighter_down_x60.png" id="1_dblhu"]
-[ext_resource type="Script" path="res://allies/ally_fighter_body.gd" id="1_ldkeo"]
+[ext_resource type="Script" path="res://allies/survivor_fighter.gd" id="1_f7oxc"]
 [ext_resource type="Texture2D" uid="uid://24okhefs2b6h" path="res://allies/sprites/survivor_fighter_left_x60.png" id="2_224b1"]
 [ext_resource type="Texture2D" uid="uid://dt441aq5sdvtr" path="res://allies/sprites/survivor_fighter_right_x60.png" id="3_7aulb"]
 [ext_resource type="Texture2D" uid="uid://blejc8hr0m01e" path="res://allies/sprites/survivor_fighter_up_x60.png" id="4_vyyvu"]
@@ -195,10 +195,13 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_gl307"]
 radius = 241.085
 
-[node name="ally_fighter" type="CharacterBody2D" groups=["ally"]]
-script = ExtResource("1_ldkeo")
+[sub_resource type="CircleShape2D" id="CircleShape2D_svpur"]
+radius = 352.456
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="ally_fighter" type="CharacterBody2D" groups=["survivor"]]
+script = ExtResource("1_f7oxc")
+
+[node name="ally_fighter_anim_2d" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0.368627, 0.478431, 1)
 scale = Vector2(1, 1.01165)
 sprite_frames = SubResource("SpriteFrames_vut0o")
@@ -208,7 +211,22 @@ offset = Vector2(0, -24)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e1s8m")
 
-[node name="ally_fighter_detection_area" type="Area2D" parent="."]
+[node name="survivor_fighter_detection_area" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ally_fighter_detection_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="survivor_fighter_detection_area"]
 shape = SubResource("CircleShape2D_gl307")
+
+[node name="attack_area" type="Area2D" parent="."]
+
+[node name="enemy_attack_area_coll" type="CollisionShape2D" parent="attack_area"]
+shape = SubResource("CircleShape2D_svpur")
+
+[node name="walking_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="continue_following" type="Timer" parent="."]
+
+[connection signal="body_entered" from="survivor_fighter_detection_area" to="." method="_on_survivor_fighter_detection_area_body_entered"]
+[connection signal="body_exited" from="survivor_fighter_detection_area" to="." method="_on_survivor_fighter_detection_area_body_exited"]
+[connection signal="timeout" from="walking_timer" to="." method="_on_walking_timer_timeout"]
+[connection signal="timeout" from="continue_following" to="." method="_on_continue_following_timeout"]
