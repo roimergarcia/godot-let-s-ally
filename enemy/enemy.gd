@@ -5,6 +5,8 @@ enum FASE_DIRECTION { UP, DOWN, LEFT, RIGHT }
 @export var speed = 120
 @export var healt = 100
 
+const ATTACK = preload("res://enemy_attack/enemy_attack.tscn")
+
 var player = null
 var player_chase = false
 var player_inattack_zone = false
@@ -12,14 +14,13 @@ var player_last_position = Vector2(0,0)
 var can_take_damage = true
 
 var walking = false
-var walk_direction := Vector2()
+var attacking = false
 var face_dir : FASE_DIRECTION = FASE_DIRECTION.DOWN; 
 
 func chase_player():
 	if player_chase and not player_inattack_zone:
 		var angulo = position.angle_to_point (player.position)
 		walking = true
-		#print((player.position - position).normalized())
 		#print(position.dot((player.position - position).normalized()))
 		#print(position.angle_to_point (player.position))
 		velocity = position.direction_to(player.position) * speed
@@ -44,7 +45,7 @@ func chase_player():
 			$attack_area/enemy_attack_area_coll.position.x = -7
 			$attack_area/enemy_attack_area_coll.position.y = 0
 	else:
-		if not walking:
+		if not walking and not attacking:
 			match(face_dir):
 				FASE_DIRECTION.UP:
 					$enemy_anim_2d.play("idle_back")
@@ -61,9 +62,8 @@ func random_movement():
 	var walk_chance = random_generator.randf_range(1, 100)
 	var _face_directions = ["UP","DOWN","LEFT","RIGHT"]
 	
-	if not player_chase and not walking and spin_chance <= 2:
+	if not player_chase and not walking and not attacking and spin_chance <= 2:
 		face_dir = FASE_DIRECTION[_face_directions[randi() % _face_directions.size()]]
-		print(face_dir)
 		
 		if walk_chance > 98:
 			var divisor_velocidad = random_generator.randf_range(0.5, 4.0)
@@ -84,19 +84,29 @@ func random_movement():
 				FASE_DIRECTION.RIGHT:
 					velocity = Vector2.RIGHT * (speed / divisor_velocidad)
 					$enemy_anim_2d.play("walk_right")
-		
-		
-		
 
-func aleatory_movement():
-	pass
-
-func exec_animation():
-	pass
+func attack():
+	if player_inattack_zone and not attacking:
+		$attack_cooldown.start()
+		attacking = true
+		if not walking:
+			match(face_dir):
+				FASE_DIRECTION.UP:
+					$enemy_anim_2d.play("attack_back")
+				FASE_DIRECTION.DOWN:
+					$enemy_anim_2d.play("attack_front")
+				FASE_DIRECTION.LEFT:
+					$enemy_anim_2d.play("attack_left")
+				FASE_DIRECTION.RIGHT:
+					$enemy_anim_2d.play("attack_right")
+		var attack = ATTACK.instantiate()
+		get_parent().add_child(attack)
+		attack.position = player.position
 
 func _physics_process(delta):
 	chase_player()
 	random_movement()
+	attack()
 	move_and_slide()
 
 
@@ -133,3 +143,8 @@ func _on_continue_chasing_timeout():
 func _on_walking_timeout():
 	velocity = Vector2.ZERO
 	walking = false
+
+
+func _on_attack_cooldown_timeout():
+	attacking = false
+
