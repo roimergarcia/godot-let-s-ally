@@ -49,12 +49,11 @@ shape = SubResource("CircleShape2D_c3np5")
 disabled = true
 
 [node name="attack_anim_2d" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_egxmc")
 animation = &"attack"
 frame = 1
 frame_progress = 0.786545
-offset = Vector2(-1, -2)
+offset = Vector2(-1, -10)
 
 [node name="attack_area" type="Area2D" parent="."]
 
