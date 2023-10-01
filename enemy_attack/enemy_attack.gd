@@ -6,7 +6,6 @@ func _ready():
 func _on_attack_area_body_entered(body):
 	$attack_anim_2d.visible = true
 	$attack_anim_2d.play("attack")
-	print(body.name)
 
 
 func _on_attack_anim_2d_animation_finished():
