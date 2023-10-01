@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ehjn31cwr121"]
+
+[ext_resource type="Script" path="res://bullet/bullet.gd" id="1_n5ddg"]
+[ext_resource type="Texture2D" uid="uid://him1mmdu000m" path="res://bullet/sprites/Bala.png" id="1_uq0lb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_umusc"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wb22"]
+radius = 4.0
+height = 12.0
+
+[node name="Bullet" type="CharacterBody2D"]
+script = ExtResource("1_n5ddg")
+
+[node name="attack_sprite_2d" type="Sprite2D" parent="."]
+texture = ExtResource("1_uq0lb")
+
+[node name="bullet_coll_shape_2d" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_umusc")
+disabled = true
+
+[node name="despawn_timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="attack_area" type="Area2D" parent="."]
+
+[node name="attack_area_coll" type="CollisionShape2D" parent="attack_area"]
+shape = SubResource("CapsuleShape2D_0wb22")
+
+[connection signal="timeout" from="despawn_timer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
