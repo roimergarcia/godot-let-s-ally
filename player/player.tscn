@@ -197,8 +197,10 @@ script = ExtResource("1_3s8c1")
 
 [node name="player_anim_2d" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_m4dmh")
-animation = &"idle_down"
+animation = &"idle_up"
 offset = Vector2(0, -24)
 
 [node name="player_coll_shape_2d" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_45br7")
+
+[node name="Marker2D" type="Marker2D" parent="."]
