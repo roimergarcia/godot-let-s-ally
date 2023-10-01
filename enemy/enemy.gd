@@ -21,25 +21,25 @@ func chase_survivor():
 		var angle = position.angle_to_point (player.position)
 		velocity = position.direction_to(player.position) * speed
 		player_last_position = player.position
-		if angle > -0.75 and angle < 0.75:
+		if angle > -0.78 and angle < 0.78:
 			face_dir = FASE_DIRECTION.RIGHT
 			$enemy_anim_2d.play("walk_right")
-			$attack_area/enemy_attack_area_coll.position.x = 7
+			$attack_area/enemy_attack_area_coll.position.x = 8
 			$attack_area/enemy_attack_area_coll.position.y = 0
-		elif angle > 0.75 and angle < 2.25:
+		elif angle > 0.78 and angle < 2.35:
 			face_dir = FASE_DIRECTION.DOWN
 			$enemy_anim_2d.play("walk_front")
 			$attack_area/enemy_attack_area_coll.position.x = 0
-			$attack_area/enemy_attack_area_coll.position.y = 7
-		elif angle < -0.75 and angle > -2.25:
+			$attack_area/enemy_attack_area_coll.position.y = 10
+		elif angle < -0.78 and angle > -2.35:
 			face_dir = FASE_DIRECTION.UP
 			$enemy_anim_2d.play("walk_back")
 			$attack_area/enemy_attack_area_coll.position.x = 0
-			$attack_area/enemy_attack_area_coll.position.y = -20
+			$attack_area/enemy_attack_area_coll.position.y = -15
 		else:
 			face_dir = FASE_DIRECTION.LEFT
 			$enemy_anim_2d.play("walk_left")
-			$attack_area/enemy_attack_area_coll.position.x = -7
+			$attack_area/enemy_attack_area_coll.position.x = -8
 			$attack_area/enemy_attack_area_coll.position.y = 0
 
 func wait_survivor():
@@ -61,8 +61,8 @@ func wait_survivor():
 
 func random_movement():
 	var random_generator = RandomNumberGenerator.new()
-	var walk_chance = random_generator.randf_range(1, 100)
-	if enemy_status == STATUS.WAITING and walk_chance < 2:
+	var walk_chance = random_generator.randf_range(0.5, 100)
+	if enemy_status == STATUS.WAITING and walk_chance < 0.7:
 		var speed_divider = random_generator.randf_range(1, 4.0)
 		var walk_time = random_generator.randf_range(1, 4.0)
 		enemy_status = STATUS.WALKING
@@ -86,6 +86,7 @@ func attack_survivor():
 	if enemy_status == STATUS.ATTACKING and not attacked:
 		$attack_cooldown.start()
 		attacked = true
+		velocity = Vector2.ZERO
 		match(face_dir):
 			FASE_DIRECTION.UP:
 				$enemy_anim_2d.play("attack_back")
@@ -131,13 +132,16 @@ func _on_attack_area_body_exited(body):
 		enemy_status = STATUS.CHASING
 
 func _on_continue_chasing_timeout():
-	velocity = Vector2.ZERO
-	enemy_status = STATUS.WAITING
+	if enemy_status == STATUS.WALKING:
+		velocity = Vector2.ZERO
+		enemy_status = STATUS.WAITING
 
 func _on_walking_timeout():
-	velocity = Vector2.ZERO
-	enemy_status = STATUS.WAITING
+	if enemy_status == STATUS.WALKING:
+		velocity = Vector2.ZERO
+		enemy_status = STATUS.WAITING
 
 func _on_attack_cooldown_timeout():
-	attacked = false
+	if enemy_status == STATUS.ATTACKING:
+		attacked = false
 
