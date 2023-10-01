@@ -8,20 +8,20 @@
 [node name="enemy" parent="." instance=ExtResource("1_726yh")]
 position = Vector2(500, 500)
 
-[node name="player" parent="." instance=ExtResource("2_evwcq")]
-position = Vector2(1091, 712)
-
-[node name="enemy2" parent="." instance=ExtResource("1_726yh")]
-position = Vector2(1500, 500)
-
-[node name="enemy3" parent="." instance=ExtResource("1_726yh")]
-position = Vector2(772, 981)
-
-[node name="enemy4" parent="." instance=ExtResource("1_726yh")]
-position = Vector2(214, 885)
+[node name="enemy6" parent="." instance=ExtResource("1_726yh")]
+position = Vector2(780, 954)
 
 [node name="enemy5" parent="." instance=ExtResource("1_726yh")]
-position = Vector2(1010, 239)
+position = Vector2(1316, 952)
 
-[node name="enemy6" parent="." instance=ExtResource("1_726yh")]
-position = Vector2(1706, 976)
+[node name="enemy4" parent="." instance=ExtResource("1_726yh")]
+position = Vector2(1346, 478)
+
+[node name="enemy3" parent="." instance=ExtResource("1_726yh")]
+position = Vector2(1756, 712)
+
+[node name="enemy2" parent="." instance=ExtResource("1_726yh")]
+position = Vector2(1722, 442)
+
+[node name="player" parent="." instance=ExtResource("2_evwcq")]
+position = Vector2(1091, 712)
