@@ -227,6 +227,4 @@ autostart = true
 [node name="continue_following" type="Timer" parent="."]
 
 [connection signal="body_entered" from="survivor_fighter_detection_area" to="." method="_on_survivor_fighter_detection_area_body_entered"]
-[connection signal="body_exited" from="survivor_fighter_detection_area" to="." method="_on_survivor_fighter_detection_area_body_exited"]
 [connection signal="timeout" from="walking_timer" to="." method="_on_walking_timer_timeout"]
-[connection signal="timeout" from="continue_following" to="." method="_on_continue_following_timeout"]
