@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bph5s7adwnd80"]
+
+[ext_resource type="Script" path="res://medic_kit/medic_kit.gd" id="1_u3t2o"]
+[ext_resource type="Texture2D" uid="uid://c3uqbad30pmi5" path="res://medic_kit/sprites/medic_kit.png" id="1_vemjo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcs67"]
+
+[node name="medic_kit" type="CharacterBody2D"]
+script = ExtResource("1_u3t2o")
+
+[node name="medic_kit_sprite_2d" type="Sprite2D" parent="."]
+texture = ExtResource("1_vemjo")
+
+[node name="medic_kit_coll_shape_2d" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jcs67")
